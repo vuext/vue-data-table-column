@@ -1,4 +1,5 @@
-import DataTableColumn from './components/Column.vue';
+import DataTableColumn from './packages/table-column';
+import './styles/index.css';
 
 const DataTableColumnPlugin = {
   install(Vue, options) {
