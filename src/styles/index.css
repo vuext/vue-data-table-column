@@ -1,2 +1,3 @@
+.data-table-column.no-sortable .caret-wrapper { display: none; }
 .data-table-column .el-table__column-filter-trigger { display: none; }
 .data-table-column .el-table__column-filter-popover { display: inline-flex; }

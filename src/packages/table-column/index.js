@@ -1,4 +1,4 @@
-import { isEmpty, forEach } from 'lodash';
+import { isEmpty, forEach, assign, cloneDeep } from 'lodash';
 
 export default {
   name: 'DataTableColumn',
@@ -71,10 +71,14 @@ export default {
       if (props.className.indexOf('data-table-column') === -1) {
         props.className.push('data-table-column');
       }
+      if (this.filterType && !props.sortable) {
+        props.sortable = 'custom';
+        props.className.push('no-sortable');
+      }
       props.className = props.className.join(' ');
-      props.filters = props.filters || (this.filterType ? [] : undefined);
+      props.filters = (props.sortable && props.filters) || (props.sortable && this.filterType ? [] : undefined);
       props.filterMethod = this.filterMethod;
-      this.innerColumnProps = props;
+      this.innerColumnProps = assign(cloneDeep(this.innerColumnProps), props);
     },
     setInnerFilterProps(val) {
       let props = this.columnProps || {};
