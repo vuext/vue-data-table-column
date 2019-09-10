@@ -1,5 +1,4 @@
-import { forEach } from 'lodash';
-import { isEmpty, isNotEmpty, combine } from '../../utils/helper';
+import { isEmpty, isNotEmpty, combine, forEach } from '../../utils/helper';
 
 export default {
   name: 'DataTableColumn',

@@ -20,6 +20,8 @@ const combine = (obj, obj2) =>
     }
   });
 
+const forEach = _.forEach;
+
 export {
-  isEmpty, isNotEmpty, isObject, combine
+  isEmpty, isNotEmpty, isObject, combine, forEach
 };

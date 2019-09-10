@@ -13,11 +13,11 @@ module.exports = {
   output: {
     fileName: (context, defaultFileName) => {
       if (context.format === 'umd' || context.format === 'umd-min') {
-        return 'vue-good-table[min].js';
+        return 'vue-data-table-column[min].js';
       }
-      return 'vue-good-table.[format].js';
+      return 'vue-data-table-column.[format].js';
     },
-    moduleName: 'vue-good-table',
+    moduleName: 'vue-data-table-column',
     format: [
       'cjs',
       'es',
