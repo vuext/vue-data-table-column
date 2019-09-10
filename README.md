@@ -2,7 +2,7 @@
 
 > A simple, customizable data table column based on vue2 and element-ui with essential features like sorting, column filtering etc.
 
-![Screenshot](_media/screenshot.gif)
+![Screenshot](https://raw.githubusercontent.com/vuext/vue-data-table-column/master/_media/screenshot.gif)
 
 ## Features
 
