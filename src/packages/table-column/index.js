@@ -1,4 +1,5 @@
-import { isEmpty, forEach, assign, cloneDeep } from 'lodash';
+import { forEach } from 'lodash';
+import { isEmpty, isNotEmpty, combine } from '../../utils/helper';
 
 export default {
   name: 'DataTableColumn',
@@ -48,12 +49,12 @@ export default {
     },
     value (val) {
       if (isEmpty(this.innerColumnProps.labelClassName)) {
-        this.innerColumnProps.labelClassName = isEmpty(val) ? '' : 'highlight';
+        this.innerColumnProps.labelClassName = isNotEmpty(val) ? 'highlight' : '';
       } else {
         let styles = this.innerColumnProps.labelClassName.split(' ')
-          .filter(v => isEmpty(v) === false)
+          .filter(v => isNotEmpty(v))
           .filter(v => v.indexOf('highlight') === -1);
-        if (isEmpty(val) === false) {
+        if (isNotEmpty(val)) {
           styles.push('highlight');
         }
         this.innerColumnProps.labelClassName = styles.join(' ');
@@ -78,10 +79,9 @@ export default {
       props.className = props.className.join(' ');
       props.filters = (props.sortable && props.filters) || (props.sortable && this.filterType ? [] : undefined);
       props.filterMethod = this.filterMethod;
-      this.innerColumnProps = assign(cloneDeep(this.innerColumnProps), props);
+      this.innerColumnProps = combine(this.innerColumnProps, props);
     },
     setInnerFilterProps(val) {
-      let props = this.columnProps || {};
       this.innerFilterProps = {
         type: this.filterType,
         data: val.data || [],
@@ -399,11 +399,11 @@ export default {
             let { column, row } = props, value;
             if (typeof self.$scopedSlots.default === 'function') {
               value = self.$scopedSlots.default(props);
-            } else if (column.property && isEmpty(row[column.property]) === false) {
+            } else if (column.property && isNotEmpty(row[column.property])) {
               value = typeof self.formatter === 'function'
                 ? self.formatter(row, column, row[column.property], column.index) : row[column.property];
             }
-            if (isEmpty(value) === false) {
+            if (isNotEmpty(value)) {
               return h('div', [ value ]);
             }
           },
@@ -411,20 +411,20 @@ export default {
             let { column, $index } = props, value;
             if (typeof self.$scopedSlots.header === 'function') {
               value = self.$scopedSlots.header(props);
-            } else if (isEmpty(self.filterType) === false) {
+            } else if (isNotEmpty(self.filterType)) {
               value = self.renderHeader(h, { column, $index });
             } else {
               value = typeof self.innerColumnProps.renderHeader === 'function'
                 ? self.innerColumnProps.renderHeader(h, props) : column.label;
             }
-            if (isEmpty(value) === false) {
+            if (isNotEmpty(value)) {
               return h('span', [ value ]);
             }
           }
         }
       },
       [
-        isEmpty(this.$slots) === false ? forEach(this.$slots, (_, name) => {
+        isNotEmpty(this.$slots) ? forEach(this.$slots, (_, name) => {
           return h('div', this.$slots[name]);
         }) : undefined,
       ]
