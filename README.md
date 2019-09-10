@@ -82,7 +82,7 @@ Available filter types:
 Filter properties:
 
 | Prop                | Type     | Default              | Description                                     |
-|---------------------------------------------------------------------------------------------------------|
+| ------------------- | -------- | -------------------- | ----------------------------------------------- |
 | type                | String   |                      | Filter type ('text','select','date','datetime') |
 | data                | Array    |                      | Data for select filter [{label, value}]         |
 | filterMethod        | Function |                      | Same as el-table-column filter method           |
